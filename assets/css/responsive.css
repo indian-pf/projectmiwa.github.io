@@ -73,6 +73,72 @@
     .feature-grid {
         gap: var(--spacing-md);
     }
+
+    /* Auth Container */
+    .auth-container {
+        padding: var(--spacing-md);
+        margin-top: 40px;
+    }
+
+    .auth-box {
+        padding: var(--spacing-lg);
+        max-width: 100%;
+    }
+
+    /* Progress Steps */
+    .progress-steps {
+        margin-bottom: var(--spacing-lg);
+        padding: 0;
+    }
+
+    .step-label {
+        font-size: 0.75rem;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.875rem;
+    }
+
+    .progress-line {
+        margin: 0 var(--spacing-xs);
+    }
+
+    /* OTP Inputs */
+    .otp-input-group {
+        gap: 8px;
+    }
+
+    .otp-input {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    /* Form Groups */
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .form-group label {
+        font-size: 0.875rem;
+    }
+
+    /* Buttons */
+    .cta-button {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+
+    /* Toast Notifications */
+    .toast {
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -92,6 +158,47 @@
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+}
+
+/* Small phones */
+@media (max-width: 360px) {
+    .auth-box {
+        padding: var(--spacing-md);
+    }
+
+    .otp-input {
+        width: 32px;
+        height: 32px;
+    }
+
+    .progress-steps {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .progress-line {
+        width: 2px;
+        height: 20px;
+    }
+}
+
+/* Landscape mode */
+@media (max-height: 600px) and (orientation: landscape) {
+    .auth-container {
+        padding: var(--spacing-sm);
+    }
+
+    .auth-box {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* High-DPI screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .auth-box {
+        box-shadow: var(--shadow-sm);
     }
 }
 

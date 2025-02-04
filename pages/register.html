@@ -29,35 +29,93 @@
     <main class="auth-container">
         <div class="auth-box">
             <h1>Create Account</h1>
-            <form class="register-form">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required>
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Details</div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Email</div>
                 </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                <div class="progress-line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Phone</div>
                 </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" required>
-                    <div class="password-strength"></div>
+            </div>
+            <form class="register-form" id="registerForm">
+                <!-- Step 1: Initial Form -->
+                <div class="form-step" id="step1">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                    </div>
+                    <div class="form-group terms">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">I agree to the <a href="privacy.html">Terms & Privacy Policy</a></label>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="cta-button" onclick="auth.sendVerificationCodes()">
+                            <span class="button-text">Continue</span>
+                            <div class="spinner"></div>
+                        </button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" required>
+
+                <!-- Step 2: Email OTP -->
+                <div class="form-step" id="step2" style="display: none;">
+                    <div class="form-group">
+                        <label for="emailOTP">Enter Email OTP</label>
+                        <div class="otp-input-group">
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                        </div>
+                        <p class="resend-text">
+                            Didn't receive the code? 
+                            <button type="button" class="resend-button" onclick="auth.resendEmailOTP()">Resend</button>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="cta-button" onclick="auth.verifyEmailOTP()">Verify Email</button>
+                    </div>
                 </div>
-                <div class="form-group terms">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="privacy.html">Terms & Privacy Policy</a></label>
+
+                <!-- Step 3: Phone OTP -->
+                <div class="form-step" id="step3" style="display: none;">
+                    <div class="form-group">
+                        <label for="phoneOTP">Enter Phone OTP</label>
+                        <div class="otp-input-group">
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                            <input type="text" maxlength="1" class="otp-input" required>
+                        </div>
+                        <p class="resend-text">
+                            Didn't receive the code? 
+                            <button type="button" class="resend-button" onclick="auth.resendPhoneOTP()">Resend</button>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="cta-button" onclick="auth.verifyPhoneOTP()">Complete Registration</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="cta-button">Create Account</button>
-                </div>
+                
                 <div class="form-links">
                     <p>Already have an account? <a href="login.html">Login here</a></p>
                 </div>

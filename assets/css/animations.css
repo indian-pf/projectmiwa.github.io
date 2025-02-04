@@ -95,4 +95,107 @@
     100% {
         transform: translateX(100%);
     }
+}
+
+/* Success/Error Animations */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes success-circle {
+    from { 
+        transform: scale(0);
+        opacity: 1;
+    }
+    to { 
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes success-check {
+    from { 
+        stroke-dashoffset: 100;
+    }
+    to { 
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Feedback Elements */
+.feedback-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    display: none;
+}
+
+.feedback-animation.active {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.feedback-animation svg {
+    width: 100px;
+    height: 100px;
+}
+
+/* Input Feedback */
+.form-group.error input {
+    border-color: var(--error-color);
+    animation: shake 0.5s ease-in-out;
+}
+
+.form-group.success input {
+    border-color: var(--success-color);
+}
+
+.feedback-message {
+    font-size: 0.875rem;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.feedback-message.error {
+    color: var(--error-color);
+}
+
+.feedback-message.success {
+    color: var(--success-color);
+}
+
+/* Toast Notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 16px 24px;
+    border-radius: var(--radius-md);
+    background: var(--surface-dark);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast.success {
+    border-left: 4px solid var(--success-color);
+}
+
+.toast.error {
+    border-left: 4px solid var(--error-color);
 } 
