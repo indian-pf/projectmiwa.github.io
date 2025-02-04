@@ -1,0 +1,54 @@
+/* Dark theme specific styles */
+body.dark-theme {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+}
+
+.dark-theme .navbar {
+    background: var(--surface-dark);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.dark-theme .hero {
+    background: linear-gradient(135deg, var(--surface-dark) 0%, var(--background-dark) 100%);
+}
+
+.dark-theme .feature-card {
+    background: var(--card-background);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+
+.dark-theme .feature-card:hover {
+    background: var(--hover-color);
+}
+
+.dark-theme .footer-links a {
+    color: var(--text-secondary);
+}
+
+.dark-theme .footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.dark-theme .section-title h2 {
+    color: var(--text-primary);
+}
+
+.dark-theme .section-title p {
+    color: var(--text-secondary);
+}
+
+/* Form elements in dark theme */
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme select {
+    background: var(--card-background);
+    color: var(--text-primary);
+    border: 1px solid var(--hover-color);
+}
+
+.dark-theme input:focus,
+.dark-theme textarea:focus,
+.dark-theme select:focus {
+    border-color: var(--primary-color);
+}
