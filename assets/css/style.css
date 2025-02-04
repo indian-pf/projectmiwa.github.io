@@ -296,3 +296,61 @@ footer {
     border-color: var(--primary-color);
     outline: none;
 }
+
+/* Add these styles to your existing style.css */
+
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+.auth-box {
+    background: var(--card-background);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 480px;
+}
+
+.auth-box h1 {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.password-strength {
+    height: 4px;
+    width: 0;
+    background-color: #ff4444;
+    transition: all 0.3s ease;
+    margin-top: 5px;
+    border-radius: 2px;
+}
+
+.terms {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+    margin: var(--spacing-md) 0;
+}
+
+.terms input[type="checkbox"] {
+    width: auto;
+}
+
+.form-links {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
+.form-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}
