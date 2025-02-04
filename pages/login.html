@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/dark-theme.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="dark-theme">
@@ -19,6 +20,7 @@
                 <a href="features.html">Features</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
+                <a href="register.html" class="cta-button">Start your journey</a>
             </div>
             <button class="mobile-menu-button">
                 <i class="fas fa-bars"></i>
@@ -26,7 +28,7 @@
         </div>
     </nav>
 
-    <main class="login-container">
+    <main class="auth-container">
         <div class="auth-box">
             <h1>Welcome Back</h1>
             <form class="login-form">
@@ -36,14 +38,38 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" required>
+                    <div class="password-input-group">
+                        <input type="password" id="password" required>
+                        <button type="button" class="toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                </div>
+                <div class="form-group remember-me">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkbox-custom"></span>
+                        Remember me
+                    </label>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="cta-button">Login</button>
+                    <button type="submit" class="cta-button">
+                        <span class="button-text">Login</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                <div class="social-login">
+                    <button type="button" class="google-login-button" onclick="auth.signInWithGoogle()">
+                        <img src="../assets/images/google-logo.svg" alt="Google logo">
+                        <span>Continue with Google</span>
+                    </button>
                 </div>
                 <div class="form-links">
-                    <a href="#forgot-password">Forgot Password?</a>
-                    <a href="register.html">Create Account</a>
+                    <p>New to Project MIWA? <a href="register.html">Start your journey</a></p>
                 </div>
             </form>
         </div>

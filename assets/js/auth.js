@@ -6,6 +6,9 @@ class Auth {
         this.resendTimeout = 30; // seconds
         this.setupOTPInputs();
         this.setupFormSteps();
+        this.user = null;
+        this.checkAuthStatus();
+        this.initGoogleAuth();
     }
 
     setupOTPInputs() {
@@ -294,6 +297,98 @@ class Auth {
             feedback.remove();
         }, { once: true });
     }
+
+    async initGoogleAuth() {
+        // Initialize Google Sign-In
+        // Note: Replace with your Google Client ID
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        document.head.appendChild(script);
+
+        script.onload = () => {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID',
+                callback: this.handleGoogleSignIn.bind(this)
+            });
+        };
+    }
+
+    async signInWithGoogle() {
+        google.accounts.id.prompt();
+    }
+
+    async handleGoogleSignIn(response) {
+        try {
+            // Send the token to your backend
+            const result = await fetch('/api/auth/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    token: response.credential
+                })
+            });
+
+            if (!result.ok) throw new Error('Google sign in failed');
+
+            const data = await result.json();
+            this.handleAuthSuccess(data);
+        } catch (error) {
+            console.error('Google sign in error:', error);
+            this.showFeedback('error', 'Google sign in failed. Please try again.');
+        }
+    }
+
+    async login(email, password, rememberMe) {
+        try {
+            // Your existing login logic
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) throw new Error('Login failed');
+
+            const data = await response.json();
+            
+            if (rememberMe) {
+                localStorage.setItem('rememberMe', 'true');
+                localStorage.setItem('email', email);
+            } else {
+                localStorage.removeItem('rememberMe');
+                localStorage.removeItem('email');
+            }
+
+            this.handleAuthSuccess(data);
+        } catch (error) {
+            console.error('Login error:', error);
+            this.showFeedback('error', 'Login failed. Please check your credentials.');
+        }
+    }
+
+    handleAuthSuccess(data) {
+        this.isAuthenticated = true;
+        this.user = data.user;
+        localStorage.setItem('token', data.token);
+        window.location.href = '/dashboard.html';
+    }
+
+    checkAuthStatus() {
+        // Check if user was remembered
+        const rememberMe = localStorage.getItem('rememberMe');
+        const email = localStorage.getItem('email');
+        
+        if (rememberMe && email) {
+            document.getElementById('email').value = email;
+            document.getElementById('rememberMe').checked = true;
+        }
+
+        // Your existing auth status check
+    }
 }
 
 // Initialize auth
@@ -354,15 +449,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = loginForm.querySelector('[type="email"]').value;
-            const password = loginForm.querySelector('[type="password"]').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
             
-            const success = await auth.login(email, password);
-            if (success) {
-                window.location.href = '/dashboard.html';
-            } else {
-                alert('Login failed. Please try again.');
-            }
+            await auth.login(email, password, rememberMe);
         });
     }
 });
